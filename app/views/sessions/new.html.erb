@@ -1,0 +1,21 @@
+<h1>登入</h1>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_for(:session, url: log_in_path) do |f| %>
+            <%= f.label :email %>
+            <%= f.email_field :email %>
+
+            <%= f.label :password %>
+            <%= f.password_field :password %>
+
+            <%= f.label :remember_me, class: "checkbox inline" do %>
+                <%= f.check_box :remember_me %>
+                <span>記住我</span>
+            <% end %>
+
+            <%= f.submit "登入", class: "btn btn-primary" %>
+        <% end %>
+
+        <p><%= link_to "註冊", sign_up_users_path %></p>
+    </div>
+</div>

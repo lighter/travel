@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class UsersSingupTest < ActionDispatch::IntegrationTest
+class UsersSignupTest < ActionDispatch::IntegrationTest
     test "invalid sign_up information" do
-        get sign_up_users_path
+        get sign_up_path
         assert_no_difference 'User.count' do
             post users_path, user: {name: "",
                                     email: "test@test.com",
@@ -16,7 +16,7 @@ class UsersSingupTest < ActionDispatch::IntegrationTest
     end
 
     test "valid sign_up information" do
-        get sign_up_users_path
+        get sign_up_path
 
         name = "test123"
         email = "test123@test.com"

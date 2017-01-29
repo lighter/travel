@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
             # remember user
             params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
 
-            redirect_to @user
+            redirect_back_or @user
         else
             flash.now[:danger] = '密碼或帳號錯誤'
             render 'new'

@@ -20,6 +20,10 @@ module SessionsHelper
         end
     end
 
+    def current_user?(user)
+        user == current_user
+    end
+
     # check logged
     def logged_in?
         !current_user.nil?
@@ -48,4 +52,14 @@ module SessionsHelper
         cookies.delete(:remember_token)
     end
 
+    # 重新轉頁的判定
+    def redirect_back_or(default)
+        redirect_to(session[:forwarding_url] || default)
+        session.delete(:forwarding_url)
+    end
+
+    # 儲存路徑
+    def store_location
+        session[:forwarding_url] = request.url if request.get?
+    end
 end

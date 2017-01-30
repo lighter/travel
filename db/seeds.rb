@@ -1,7 +1,8 @@
 User.create!(name: "test_seed",
              email: "test_seed@test.com",
              password: "abcd1234",
-             password_confirmation: "abcd1234")
+             password_confirmation: "abcd1234",
+             admin: true)
 
 30.times do |n|
     name = Faker::Name.name

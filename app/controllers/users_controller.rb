@@ -19,12 +19,9 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
 
         if @user.save
-            # sign_up with sign_in
-            log_in @user
-
-            flash[:success] = "Welcome!"
-
-            redirect_to @user
+            @user.send_activation_email
+            flash[:info] = "請確認你的email驗證你的帳號"
+            redirect_to root_url
         else
             render 'new'
         end

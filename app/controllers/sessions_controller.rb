@@ -8,13 +8,19 @@ class SessionsController < ApplicationController
         # log in success
         if @user && @user.authenticate(params[:session][:password])
 
-            # log in user
-            log_in @user
+            if @user.activated?
+                # log in user
+                log_in @user
 
-            # remember user
-            params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
+                # remember user
+                params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
 
-            redirect_back_or @user
+                redirect_back_or @user
+            else
+                message = "帳號尚未驗證，請確認你的email"
+                flash[:warning] = message
+                redirect_to root_url
+            end
         else
             flash.now[:danger] = '密碼或帳號錯誤'
             render 'new'

@@ -21,3 +21,6 @@ Gemfile.lock
 
 # byebug
 /.byebug_history
+
+# secrets.yml
+config/secrets.yml

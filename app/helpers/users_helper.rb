@@ -1,4 +1,5 @@
-module UserHelper
+module UsersHelper
+
     def gravatar_for(user, options = nil)
         gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
 
@@ -8,4 +9,5 @@ module UserHelper
 
         image_tag(gravatar_url, alt: user.name, class: "gravatar")
     end
+
 end

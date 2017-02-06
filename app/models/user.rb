@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class User < ActiveRecord::Base
     # 添加密碼驗證
     has_secure_password
@@ -30,6 +32,22 @@ class User < ActiveRecord::Base
         def new_token
             # length 22
             SecureRandom.urlsafe_base64
+        end
+
+        def from_fb_omniauth(auth)
+            where(provider: auth.provider, uid: auth.uid, email: auth.info.email).first_or_create do |user|
+                user.email = auth.info.email
+                user.provider = auth.provider
+                user.uid = auth.uid
+                user.name = auth.info.name
+                user.password = SecureRandom.base64
+                user.oauth_token = auth.credentials.token
+                user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+            end
+        end
+
+        def sign_up_check_exist?(auth)
+            where(provider: auth.provider, uid: auth.uid, email: auth.info.email).exists?
         end
     end
 

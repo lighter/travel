@@ -16,14 +16,29 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params)
+        auth = env["omniauth.auth"]
 
-        if @user.save
-            @user.send_activation_email
-            flash[:info] = "請確認你的email驗證你的帳號"
-            redirect_to root_url
+        if auth
+            # 如果已經註冊過的 omniauth 帳號
+            # 直接做登入的動作
+            if User.sign_up_check_exist? auth
+                @user = User.find_by(provider: auth.provider, uid: auth.uid, email: auth.info.email)
+
+                if @user && @user.activated?
+                    log_in @user
+                    remember(@user)
+                    redirect_back_or @user
+                else
+                    message = "帳號尚未驗證，請確認你的email"
+                    flash[:warning] = message
+                    redirect_to root_url
+                end
+            else
+                sign_up_with_facebook(auth)
+            end
+
         else
-            render 'new'
+            sign_up_with_password(user_params)
         end
     end
 
@@ -68,5 +83,25 @@ class UsersController < ApplicationController
 
         def admin_user
             redirect_to(root_url) unless current_user.admin?
+        end
+
+        def sign_up_with_password(user_params)
+            user = User.new(user_params)
+            sign_up_user User.new(user_params)
+        end
+
+        def sign_up_with_facebook(auth)
+            user = User.from_fb_omniauth(auth)
+            sign_up_user User.from_fb_omniauth(auth)
+        end
+
+        def sign_up_user(user)
+            if user.save
+                user.send_activation_email
+                flash[:info] = "請確認你的email，驗證你的帳號"
+                redirect_to root_url
+            else
+                render 'new'
+            end
         end
 end

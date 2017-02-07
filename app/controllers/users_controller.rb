@@ -86,18 +86,17 @@ class UsersController < ApplicationController
         end
 
         def sign_up_with_password(user_params)
-            user = User.new(user_params)
             sign_up_user User.new(user_params)
         end
 
         def sign_up_with_facebook(auth)
-            user = User.from_fb_omniauth(auth)
             sign_up_user User.from_fb_omniauth(auth)
         end
 
         def sign_up_user(user)
-            if user.save
-                user.send_activation_email
+            @user = user
+            if @user.save
+                @user.send_activation_email
                 flash[:info] = "請確認你的email，驗證你的帳號"
                 redirect_to root_url
             else

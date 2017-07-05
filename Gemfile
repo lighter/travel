@@ -71,4 +71,5 @@ gem 'rails-i18n'
 # Rails Assets
 source 'https://rails-assets.org' do
     gem 'rails-assets-bootstrap'
+    gem 'rails-assets-bootstrap-social'
 end

@@ -14,7 +14,9 @@
             <% end %>
 
             <%= f.submit "登入", class: "btn btn-primary" %>
-            <%= link_to "facebook 登入", "/auth/facebook", id: "sign_in" %>
+            <%= link_to "/auth/facebook", class: "btn-social-icon btn-facebook" do %>
+                <span class="fa fa-facebook"></span>
+            <% end %>
         <% end %>
 
         <p><%= link_to "註冊", sign_up_path %></p>

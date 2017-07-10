@@ -47,6 +47,9 @@ gem 'omniauth-facebook'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'bootstrap-social-rails'
+gem 'font-awesome-rails'
+
 group :development, :test do
 
   gem 'pry-rails'

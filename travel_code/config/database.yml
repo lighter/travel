@@ -16,6 +16,7 @@ default: &default
     username: <%= Rails.application.secrets[:database][:user_name] %>
     password:
     host: <%= Rails.application.secrets[:database][:host] %>
+    port: <%= Rails.application.secrets[:database][:port] %>
 
 development:
   <<: *default

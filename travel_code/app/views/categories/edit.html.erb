@@ -1,0 +1,10 @@
+<h1>Edit Category</h1>
+<div class="row">
+  <div class="col-md-6 col-offset-3">
+    <%= form_for(@category, url: category_edit_path(@category.id), html: {method: 'put'}) do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <%= f.submit "Edit category", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

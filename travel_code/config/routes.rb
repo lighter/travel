@@ -1,21 +1,32 @@
 Rails.application.routes.draw do
-    get 'password_reset/new'
+  root 'home_page#index'
 
-    get 'password_reset/edit'
+  get 'password_reset/new'
+  get 'password_reset/edit'
 
-    root 'home_page#index'
+  get 'log_in' => 'sessions#new'
+  post 'log_in' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
 
-    get 'log_in' => 'sessions#new'
-    post 'log_in' => 'sessions#create'
-    delete 'logout' => 'sessions#destroy'
+  resources :users, except: [:new]
+  get 'sign_up' => 'users#new'
 
-    resources :users, except: [:new]
-    get 'sign_up' => 'users#new'
+  # omniauth facebook
+  match 'auth/:provider/callback' => 'users#create', via: [:get, :post]
+  match 'auth/failure' => redirect('/'), via: [:get, :post]
 
-    # omniauth facebook
-    match 'auth/:provider/callback' => 'users#create', via: [:get, :post]
-    match 'auth/failure' => redirect('/'), via: [:get, :post]
+  resources :account_activations, only: [:edit]
+  resources :password_reset, only: [:new, :create, :edit, :update]
 
-    resources :account_activations, only: [:edit]
-    resources :password_reset, only: [:new, :create, :edit, :update]
+  get 'attractions' => 'attractions#index'
+  get 'attractions/new' => 'attractions#new'
+  post 'attractions' => 'attractions#create'
+
+  get 'categories' => 'categories#index'
+  get 'categories/new' => 'categories#new', as: :category_new
+  get 'categories/:id/edit' => 'categories#edit', as: :category
+  put 'categories/:id' => 'categories#update', as: :category_edit
+  post 'categories' => 'categories#create'
+  delete 'categories/:id' => 'categories#destroy', as: :category_destroy
+  
 end

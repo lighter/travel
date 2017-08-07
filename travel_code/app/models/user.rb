@@ -1,6 +1,9 @@
 require 'securerandom'
 
 class User < ActiveRecord::Base
+
+    has_many :attractions
+
     # 添加密碼驗證
     has_secure_password
 

@@ -1,0 +1,26 @@
+<h1>New Atrraction</h1>
+<div class="row">
+  <div class="col-md-6 col-offset-3">
+    <%= form_for(@attractions) do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+
+        <%= f.label :longitude %>
+        <%= f.text_field :longitude %>
+
+        <%= f.label :latitude %>
+        <%= f.text_field :latitude %>
+
+        <%= f.label :country, 'country' %>
+        <%= f.text_field :country %>
+
+        <%= f.label :address %>
+        <%= f.text_field :address %>
+
+        <%= f.label :phone %>
+        <%= f.text_field :phone %>
+
+        <%= f.submit "Create attraction", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

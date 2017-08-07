@@ -1,0 +1,18 @@
+<h1>Attractions</h1>
+
+<%= @attractions.inspect %>
+
+<table class="table table-condensed table-hover">
+  <thead>
+    <td>#</td>
+    <td>Name</td>
+  </thead>
+  <tbody>
+    <% @attractions.each_with_index do |attraction, index|  %>
+      <tr>
+        <td><%= index %></td>
+        <td><%= attraction.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

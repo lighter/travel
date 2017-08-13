@@ -1,4 +1,7 @@
 class Category < ActiveRecord::Base
+
+  has_many :attractions
+
   default_scope -> {where(deleted_at: nil)}
 
   def soft_delete

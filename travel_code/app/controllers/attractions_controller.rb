@@ -20,9 +20,20 @@ class AttractionsController < ApplicationController
     end
   end
 
+  def edit
+    @attraction = Attraction.find(edit_attraction_params[:id])
+    address = @attraction.address.split('@@')
+    @attraction.country = address[0]
+    @attraction.address = address[1]
+  end
+
   private
 
   def attraction_params
-    params.require(:attraction).permit(:name, :longitude, :latitude, :address, :phone, :country)
+    params.require(:attraction).permit(:name, :longitude, :latitude, :address, :phone, :country, :type)
+  end
+
+  def edit_attraction_params
+    params.permit(:id)
   end
 end

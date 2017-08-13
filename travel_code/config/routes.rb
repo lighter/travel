@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   get 'attractions' => 'attractions#index'
   get 'attractions/new' => 'attractions#new'
+  get 'attractions/:id/edit' => 'attractions#edit', as: :attraction
+  put 'attractions/:id' => 'attractions#update', as: :attraction_edit
   post 'attractions' => 'attractions#create'
 
   get 'categories' => 'categories#index'

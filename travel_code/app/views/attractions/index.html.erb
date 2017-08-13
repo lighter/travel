@@ -6,12 +6,24 @@
   <thead>
     <td>#</td>
     <td>Name</td>
+    <td>Created by</td>
+    <td>Created at</td>
+    <td>Updated at</td>
+    <td>Method</td>
   </thead>
   <tbody>
     <% @attractions.each_with_index do |attraction, index|  %>
       <tr>
         <td><%= index %></td>
         <td><%= attraction.name %></td>
+        <td><%= attraction.user.name%></td>
+        <td><%= time_ago_in_words(attraction.created_at)%></td>
+        <td><%= time_ago_in_words(attraction.updated_at)%></td>
+        <td>
+          <%= link_to 'Edit',
+                      attraction_path(attraction.id),
+                      class: 'btn btn-default' %>
+        </td>
       </tr>
     <% end %>
   </tbody>

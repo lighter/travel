@@ -50,6 +50,10 @@ gem 'omniauth-facebook'
 gem 'bootstrap-social-rails'
 gem 'font-awesome-rails'
 
+# GEO
+gem 'geocoder'
+
+
 group :development, :test do
 
   gem 'pry-rails'

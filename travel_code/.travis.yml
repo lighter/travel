@@ -8,6 +8,7 @@ script:
     - bundle exec rake test/
 before_script:
     - cd travel_code
+    - bundle install
     - cp config/database.travis.yml config/database.yml
     - mysql -e 'create database mydb_test'
 bundler_args: --binstubs=./bundler_stubs

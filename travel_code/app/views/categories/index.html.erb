@@ -8,6 +8,7 @@
     <td>Name</td>
     <td>Created_at</td>
     <td>Modified_at</td>
+    <td>Created by</td>
     <td>Method</td>
   </thead>
 
@@ -18,6 +19,7 @@
         <td><%= category.name %></td>
         <td><%= time_ago_in_words(category.created_at) %></td>
         <td><%= time_ago_in_words(category.updated_at) %></td>
+        <td><%= category.user.name %></td>
         <td>
           <%= link_to 'Delete',
                       category_destroy_path(category.id),

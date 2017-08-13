@@ -11,8 +11,8 @@
         <%= f.label :latitude %>
         <%= f.text_field :latitude %>
 
-        <%= f.label :type, 'type' %>
-        <%= collection_select(:attraction, :type, Category.all, :id, :name, {}, {class: 'form-control'}) %>
+        <%= f.label :category_id, 'Category id' %>
+        <%= collection_select(:attraction, :category_id, Category.all, :id, :name, {}, {class: 'form-control'}) %>
 
         <%= f.label :address %>
         <%= f.text_field :address %>

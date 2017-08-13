@@ -13,7 +13,7 @@
 
         <%= f.label :type, 'type' %>
         <%= collection_select(:attraction, :type, Category.all, :id, :name, {}, {class: 'form-control'}) %>
-        
+
         <%= f.label :address %>
         <%= f.text_field :address %>
 

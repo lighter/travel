@@ -1,6 +1,4 @@
 class Attraction < ActiveRecord::Base
-  attr_accessor :country
-  
   belongs_to :user
   belongs_to :category
   

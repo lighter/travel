@@ -13,9 +13,6 @@
 
         <%= f.label :type, 'type' %>
         <%= collection_select(:attraction, :type, Category.all, :id, :name, {}, {class: 'form-control'}) %>
-
-        <%= f.label :country, 'country' %>
-        <%= f.text_field :country %>
         
         <%= f.label :address %>
         <%= f.text_field :address %>

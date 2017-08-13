@@ -9,7 +9,6 @@ class AttractionsController < ApplicationController
 
   def create
     post_params = attraction_params
-    post_params[:address] = "#{post_params[:address]}@@#{post_params[:country]}"
 
     @attractions = current_user.attractions.build(post_params)
 
@@ -22,15 +21,12 @@ class AttractionsController < ApplicationController
 
   def edit
     @attraction = Attraction.find(edit_attraction_params[:id])
-    address = @attraction.address.split('@@')
-    @attraction.country = address[0]
-    @attraction.address = address[1]
   end
 
   private
 
   def attraction_params
-    params.require(:attraction).permit(:name, :longitude, :latitude, :address, :phone, :country, :type)
+    params.require(:attraction).permit(:name, :longitude, :latitude, :address, :phone, :type)
   end
 
   def edit_attraction_params

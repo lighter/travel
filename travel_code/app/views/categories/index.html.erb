@@ -1,39 +1,41 @@
 <h1>Categories index</h1>
 
-<%= link_to 'New', category_new_path, class: 'btn btn-primary' %>
+<div class="table-responsive">
+  <table class="table table-condensed table-striped table-hover">
+    <thead>
+    <th>#</th>
+    <th>Name</th>
+    <th>Created_at</th>
+    <th>Modified_at</th>
+    <th>Created by</th>
+    <th>Method</th
+    </thead>
 
-<table class="table table-condensed table-hover">
-  <thead>
-    <td>#</td>
-    <td>Name</td>
-    <td>Created_at</td>
-    <td>Modified_at</td>
-    <td>Created by</td>
-    <td>Method</td>
-  </thead>
+    <tbody>
+    <% @categories.each_with_index do |category, index| %>
+        <tr>
+          <td><%= index %></td>
+          <td><%= category.name %></td>
+          <td><%= time_ago_in_words(category.created_at) %></td>
+          <td><%= time_ago_in_words(category.updated_at) %></td>
+          <td><%= category.user.name %></td>
+          <td>
+            <%= link_to 'Delete',
+                        category_destroy_path(category.id),
+                        method: :delete,
+                        data: {confirm: '確定刪除?'},
+                        class: 'btn btn-danger' %>
 
-  <tbody>
-  <% @categories.each_with_index do |category, index| %>
-      <tr>
-        <td><%= index %></td>
-        <td><%= category.name %></td>
-        <td><%= time_ago_in_words(category.created_at) %></td>
-        <td><%= time_ago_in_words(category.updated_at) %></td>
-        <td><%= category.user.name %></td>
-        <td>
-          <%= link_to 'Delete',
-                      category_destroy_path(category.id),
-                      method: :delete,
-                      data: {confirm: 'Are you sure?'},
-                      class: 'btn btn-default' %>
-          
-          <%= link_to 'Edit',
-                      category_path(category.id),
-                      class: 'btn btn-default' %>
-        </td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+            <%= link_to 'Edit',
+                        category_path(category.id),
+                        class: 'btn btn-primary' %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
 
-<%= will_paginate %>
+
+  <%= will_paginate %>
+
+</div>

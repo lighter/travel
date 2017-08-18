@@ -6,7 +6,7 @@ class Category < ActiveRecord::Base
 
   validates_uniqueness_of :name
 
-  default_scope -> {where(deleted_at: nil)}
+  default_scope {where(deleted_at: nil)}
 
   def soft_delete
     update(deleted_at: Time.current)

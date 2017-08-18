@@ -9,6 +9,11 @@ class Attraction < ActiveRecord::Base
   validates :address, length: {maximum: 255}
   validates :phone, length: {maximum: 20}
   validates :category_id, numericality: {only_integer: true}
-  
-  default_scope -> {order(created_at: :desc)}
+
+  default_scope {order(created_at: :desc)}
+  default_scope {where(deleted_at: nil)}
+
+  def soft_delete
+    update(deleted_at: Time.current)
+  end
 end

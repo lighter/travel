@@ -32,13 +32,12 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find(params[:id])
 
-    @category.name = update_category_params[:name]
-
-    if @category.save
+    if @category.update_attributes(category_params)
       redirect_to categories_path
     else
       render text: 'not ok'
     end
+
   end
 
 
@@ -54,9 +53,5 @@ class CategoriesController < ApplicationController
 
   def edit_category_params
     params.permit(:id)
-  end
-
-  def update_category_params
-    params.require(:category).permit(:name)
   end
 end

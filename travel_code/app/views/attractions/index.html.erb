@@ -18,9 +18,14 @@
         <td><%= time_ago_in_words(attraction.created_at)%></td>
         <td><%= time_ago_in_words(attraction.updated_at)%></td>
         <td>
-          <%= link_to 'Edit',
+          <%= link_to '刪除',
+                      attraction_destroy_path(attraction.id),
+                      method: :delete,
+                      data: {confirm: '確定刪除?'},
+                      class: 'btn btn-danger' %>
+          <%= link_to '修改',
                       attraction_path(attraction.id),
-                      class: 'btn btn-default' %>
+                      class: 'btn btn-primary' %>
         </td>
       </tr>
     <% end %>

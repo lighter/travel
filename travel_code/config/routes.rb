@@ -19,10 +19,11 @@ Rails.application.routes.draw do
   resources :password_reset, only: [:new, :create, :edit, :update]
 
   get 'attractions' => 'attractions#index'
-  get 'attractions/new' => 'attractions#new'
+  get 'attractions/new' => 'attractions#new', as: :attraction_new
   get 'attractions/:id/edit' => 'attractions#edit', as: :attraction
   put 'attractions/:id' => 'attractions#update', as: :attraction_edit
   post 'attractions' => 'attractions#create'
+  delete 'attractions/:id' => 'attractions#destroy', as: :attraction_destroy
 
   get 'categories' => 'categories#index'
   get 'categories/new' => 'categories#new', as: :category_new

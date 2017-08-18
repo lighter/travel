@@ -1,26 +1,54 @@
 <h1>New Atrraction</h1>
 <div class="row">
-  <div class="col-md-6 col-offset-3">
+  <div class="col-md-6 col-md-offset-3">
     <%= form_for(@attractions) do |f| %>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
+        <div class="form-group">
+          <%= f.label :name, class: "col-md-2 control-label" %>
+          <div class="col-md-10">
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+        </div>
 
-        <%= f.label :longitude %>
-        <%= f.text_field :longitude %>
+        <div class="form-group">
+          <%= f.label :longitude, class: "col-md-2 control-label" %>
+          <div class="col-md-10">
+            <%= f.text_field :longitude, class: "form-control" %>
+          </div>
+        </div>
 
-        <%= f.label :latitude %>
-        <%= f.text_field :latitude %>
+        <div class="form-group">
+          <%= f.label :latitude, class: "col-md-2 control-label" %>
+          <div class="col-md-10">
+            <%= f.text_field :latitude, class: "form-control" %>
+          </div>
+        </div>
 
-        <%= f.label :category_id, 'Category' %>
-        <%= collection_select(:attraction, :category_id, Category.all, :id, :name, {}, {class: 'form-control'}) %>
+        <div class="form-group">
+          <%= f.label :category_id, class: "col-md-2 control-label" %>
+          <div class="col-md-10">
+            <%= collection_select(:attraction, :category_id, Category.all, :id, :name, {}, {class: 'form-control'}) %>
+          </div>
+        </div>
 
-        <%= f.label :address %>
-        <%= f.text_field :address %>
+        <div class="form-group">
+          <%= f.label :address, class: "col-md-2 control-label" %>
+          <div class="col-md-10">
+            <%= f.text_field :address, class: "form-control" %>
+          </div>
+        </div>
 
-        <%= f.label :phone %>
-        <%= f.text_field :phone %>
+        <div class="form-group">
+          <%= f.label :phone, class: "col-md-2 control-label" %>
+          <div class="col-md-10">
+            <%= f.text_field :phone, class: "form-control" %>
+          </div>
+        </div>
 
-        <%= f.submit "Create attraction", class: "btn btn-primary" %>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <%= f.submit "新增", class: "btn btn-primary" %>
+          </div>
+        </div>
     <% end %>
   </div>
 </div>

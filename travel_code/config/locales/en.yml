@@ -20,4 +20,32 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  setting: "Setting"
+  create: "Create"
+  update: "Update"
+  account: "Account"
+  home_page: "Home"
+  log_out: "Log out"
+  log_in: "Log in"
+  created_at: "Created at"
+  updated_at: "Updated at"
+  created_by: "Created by"
+  operate: "Operate"
+  delete: "Delete"
+  delete_confirm?: "Confirm delete?"
+  category:
+    category: "Category"
+    all: "Categories"
+    add: "Create category"
+    name: "Category name"
+    edit: "Edit category"
+  attraction:
+    attraction: "Attraction"
+    all: "Attractions"
+    add: "Create attraction"
+  user:
+    user: "User"
+    all: "Users"
+    profile: "Profile"
+
+

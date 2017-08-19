@@ -1,14 +1,14 @@
-<h1>Categories index</h1>
+<h1><%= t("category.category")%></h1>
 
 <div class="table-responsive">
   <table class="table table-condensed table-striped table-hover">
     <thead>
     <th>#</th>
-    <th>Name</th>
-    <th>Created_at</th>
-    <th>Modified_at</th>
-    <th>Created by</th>
-    <th>Method</th
+    <th><%= t("category.category") %></th>
+    <th><%= t("created_at") %></th>
+    <th><%= t("updated_at") %></th>
+    <th><%= t("created_by") %></th>
+    <th><%= t("operate") %></th>
     </thead>
 
     <tbody>
@@ -20,13 +20,13 @@
           <td><%= time_ago_in_words(category.updated_at) %></td>
           <td><%= category.user.name %></td>
           <td>
-            <%= link_to 'Delete',
+            <%= link_to t("delete"),
                         category_destroy_path(category.id),
                         method: :delete,
-                        data: {confirm: '確定刪除?'},
+                        data: {confirm: t("delete_confirm?")},
                         class: 'btn btn-danger' %>
 
-            <%= link_to 'Edit',
+            <%= link_to t("update"),
                         category_path(category.id),
                         class: 'btn btn-primary' %>
           </td>

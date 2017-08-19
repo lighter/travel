@@ -11,18 +11,21 @@ class CategoriesController < ApplicationController
     @categories = current_user.categories.new(category_params)
 
     if @categories.save
+      flash[:success] = "新增成功"
       redirect_to categories_path
     else
-      render :text => 'not ok'
+      flash[:danger] = @categories.errors.full_messages
+      render action: :new
     end
   end
 
   def destroy
     if Category.find(delete_category_params[:id]).soft_delete
-      render text: 'ok'
+      flash[:success] = "刪除成功"
     else
-      render text: 'not ok'
+      flash[:danger] = "刪除失敗"
     end
+    redirect_to categories_path
   end
 
   def edit
@@ -33,9 +36,11 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
 
     if @category.update_attributes(category_params)
+      flash[:success] = "更新成功"
       redirect_to categories_path
     else
-      render text: 'not ok'
+      flash[:danger] = @category.errors.full_messages
+      render action: :edit
     end
 
   end

@@ -11,9 +11,11 @@ class AttractionsController < ApplicationController
     @attractions = current_user.attractions.build(attraction_params)
 
     if @attractions.save
+      flash[:success] = "新增成功"
       redirect_to attractions_path
     else
-      render text: 'not ok'
+      flash[:danger] = @attractions.errors.full_messages
+      render action: :new
     end
   end
 
@@ -25,18 +27,22 @@ class AttractionsController < ApplicationController
     @attraction = Attraction.find(params[:id])
 
     if @attraction.update_attributes(attraction_params)
+      flash[:success] = "更新成功"
       redirect_to attractions_path
     else
-      render text: 'not ok'
+      flash[:danger] = @attraction.errors.full_messages
+      render action: :edit
     end
   end
 
   def destroy
     if Attraction.find(delete_attraction_params[:id]).soft_delete
-      redirect_to attractions_path
+      flash[:success] = "刪除成功"
     else
-      render text: 'not ok'
+      flash[:success] = "刪除失敗"
     end
+
+    redirect_to attractions_path
   end
 
 

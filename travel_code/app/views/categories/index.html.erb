@@ -5,9 +5,9 @@
     <thead>
     <th>#</th>
     <th><%= t("category.category") %></th>
+    <th><%= t("created_by") %></th>
     <th><%= t("created_at") %></th>
     <th><%= t("updated_at") %></th>
-    <th><%= t("created_by") %></th>
     <th><%= t("operate") %></th>
     </thead>
 
@@ -16,9 +16,9 @@
         <tr>
           <td><%= index %></td>
           <td><%= category.name %></td>
+          <td><%= category.user.name %></td>
           <td><%= time_ago_in_words(category.created_at) %></td>
           <td><%= time_ago_in_words(category.updated_at) %></td>
-          <td><%= category.user.name %></td>
           <td>
             <%= link_to t("delete"),
                         category_destroy_path(category.id),

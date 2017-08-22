@@ -13,6 +13,6 @@ before_install:
     - cd travel_code
     - gem install bundler
 install:
-    - bundle install --path=vendor/bundle
+    - bundle install
 bundler_args: --binstubs=./bundler_stubs
 

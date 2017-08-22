@@ -21,12 +21,12 @@
 
     <%= link_to "/auth/facebook", {id: "sign_in", class: "btn btn-block btn-social btn-facebook"}  do %>
         <span class="fa fa-facebook"></span>
-        facebook 登入
+        facebook <%= t("log_in") %>
     <% end %>
 
     <%= link_to "#", {id: "sign_in", class: "btn btn-block btn-social btn-google"}  do %>
         <span class="fa fa-google"></span>
-        google 登入
+        google <%= t("log_in") %>
     <% end %>
 
     <p><%= link_to t("sign_up"), sign_up_path %></p>

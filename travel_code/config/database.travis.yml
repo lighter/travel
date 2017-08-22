@@ -3,5 +3,5 @@ default: &default
 test:
     <<: *default
     database: mydb_test
-    username: travis
+    username: postgres
     encoding: utf8

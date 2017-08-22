@@ -5,14 +5,8 @@ env:
     - DB=postgresql
 script:
     - RAILS_ENV=test bundle exec rake db:migrate --trace
-    - bundle exec rake test
-before_script:
-    - cp config/database.travis.yml config/database.yml
-    - psql -c 'create database mydb_test' -U postgres
 before_install:
     - cd travel_code
-    - gem install bundler
-install:
-    - bundle install
-bundler_args: --binstubs=./bundler_stubs
+    - cp config/database.travis.yml config/database.yml
+    - psql -c 'create database mydb_test' -U postgres
 

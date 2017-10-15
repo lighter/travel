@@ -1,0 +1,19 @@
+<%= will_paginate %>
+
+<table class="table table-condensed table-hover" id="attraction_table">
+  <thead>
+  <td>#</td>
+  <td><%= t("attraction.name")%></td>
+  <td><%= t("created_by")%></td>
+  <td><%= t("created_at")%></td>
+  <td><%= t("updated_at")%></td>
+  <td><%= t("operate")%></td>
+  </thead>
+  <tbody>
+  <% @attractions.each_with_index do |attraction, index|  %>
+      <%= render "attractions", { attraction: attraction, index: index } %>
+  <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate %>

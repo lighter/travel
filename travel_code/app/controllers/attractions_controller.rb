@@ -1,6 +1,9 @@
 class AttractionsController < ApplicationController
+  before_action :logged_in_user, only: [:index, :new, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update]
+
   def index
-    @attractions = Attraction.all
+    @attractions = Attraction.paginate(page: params[:page])
   end
 
   def new
@@ -43,6 +46,12 @@ class AttractionsController < ApplicationController
     end
 
     redirect_to attractions_path
+  end
+
+  def search
+    @attractions = Attraction.where('name like ?', "%#{params[:search_name]}%").paginate(page: params[:page])
+
+    render '_attractions_table', layout: false
   end
 
 

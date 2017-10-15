@@ -1,0 +1,17 @@
+<tr>
+  <td><%= index %></td>
+  <td><%= attraction.name %></td>
+  <td><%= attraction.user.name%></td>
+  <td><%= time_ago_in_words(attraction.created_at)%></td>
+  <td><%= time_ago_in_words(attraction.updated_at)%></td>
+  <td>
+    <%= link_to t("delete"),
+                attraction_destroy_path(attraction.id),
+                method: :delete,
+                data: {confirm: t("delete_confirm?")},
+                class: 'btn btn-danger' %>
+    <%= link_to t("update"),
+                attraction_path(attraction.id),
+                class: 'btn btn-primary' %>
+  </td>
+</tr>

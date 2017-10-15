@@ -1,33 +1,12 @@
 <h1><%= t("attraction.attraction")%></h1>
 
-<table class="table table-condensed table-hover">
-  <thead>
-    <td>#</td>
-    <td><%= t("attraction.name")%></td>
-    <td><%= t("created_by")%></td>
-    <td><%= t("created_at")%></td>
-    <td><%= t("updated_at")%></td>
-    <td><%= t("operate")%></td>
-  </thead>
-  <tbody>
-    <% @attractions.each_with_index do |attraction, index|  %>
-      <tr>
-        <td><%= index %></td>
-        <td><%= attraction.name %></td>
-        <td><%= attraction.user.name%></td>
-        <td><%= time_ago_in_words(attraction.created_at)%></td>
-        <td><%= time_ago_in_words(attraction.updated_at)%></td>
-        <td>
-          <%= link_to t("delete"),
-                      attraction_destroy_path(attraction.id),
-                      method: :delete,
-                      data: {confirm: t("delete_confirm?")},
-                      class: 'btn btn-danger' %>
-          <%= link_to t("update"),
-                      attraction_path(attraction.id),
-                      class: 'btn btn-primary' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<form class="form-inline">
+  <div class="form-group">
+    <input type="text" class="form-control" id="search_attraction_name" placeholder="景點名稱">
+  </div>
+  <button type="button" class="btn btn-default" style="margin-bottom: 15px;" id="search_attraction">搜尋</button>
+</form>
+
+
+<div id="attraction_div"><%= render 'attractions_table' %></div>
+

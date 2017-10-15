@@ -2,14 +2,9 @@ $(function () {
   $('#search_attraction').click(function () {
     var search_attraction_name = $('#search_attraction_name').val();
 
-    $.ajax({
-      method: 'POST',
-      url: '/attraction/search',
-      data: { search_name: search_attraction_name }
-    }).done(function (response) {
-      $('#attraction_div').empty().html(response);
-    }).fail(function (error) {
-      console.log(error);
-    });
+    if (search_attraction_name !== '') {
+      window.location.href = window.location.origin + '/attractions/search?search_name=' + search_attraction_name;
+    }
+
   });
 });

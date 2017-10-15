@@ -49,9 +49,11 @@ class AttractionsController < ApplicationController
   end
 
   def search
-    @attractions = Attraction.where('name like ?', "%#{params[:search_name]}%").paginate(page: params[:page])
+    @attractions = Attraction
+                       .where('name like ?', "%#{params[:search_name]}%")
+                       .paginate(page: params[:page])
 
-    render '_attractions_table', layout: false
+    render 'index'
   end
 
 

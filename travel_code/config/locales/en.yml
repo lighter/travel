@@ -62,5 +62,8 @@ en:
     profile: "Profile"
     edit: "Edit User"
     name: "user name"
+  will_paginate:
+    previous_label: "Previous"
+    next_label: "Next"
 
 

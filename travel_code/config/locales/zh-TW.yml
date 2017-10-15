@@ -41,3 +41,6 @@ zh-TW:
     profile: "個人資訊"
     edit: "編輯使用者"
     name: "名稱"
+  will_paginate:
+    previous_label: "上一頁"
+    next_label: "下一頁"

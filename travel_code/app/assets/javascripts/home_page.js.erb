@@ -1,0 +1,27 @@
+$(function () {
+  var total_page = 0, current_page = 1;
+
+  var loadAttractionData = function (current_page) {
+    $.post({
+      url: '/home/attractions?page=' + current_page
+    }).done(function (response) {
+      console.log(response);
+      $('#home_page').append(response.data);
+      total_page = response.pageInfo.total_page;
+      current_page = response.pageInfo.current_page;
+    }).fail(function (error) {
+      console.log(error);
+    });
+  }
+
+  loadAttractionData(current_page);
+
+  $(window).scroll(function () {
+    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+      if (current_page <= total_page) {
+        loadAttractionData(current_page++);
+      }
+    }
+  });
+
+});

@@ -8,7 +8,7 @@ gem 'rails', '4.2.9'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
-gem 'pg'
+gem 'pg','~> 0.20.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -53,6 +53,8 @@ gem 'font-awesome-rails'
 # GEO
 gem 'geocoder'
 
+# puma
+gem "puma"
 
 group :development, :test do
 
@@ -77,5 +79,6 @@ gem 'rails-i18n'
 
 # Rails Assets
 source 'https://rails-assets.org' do
-    gem 'rails-assets-bootstrap'
+  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-jquery-loading'
 end

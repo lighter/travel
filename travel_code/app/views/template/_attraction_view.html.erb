@@ -1,0 +1,3 @@
+<% @attractions.each_with_index do |attraction, index| %>
+    <%= render "template/attraction_card", { attraction: attraction, index: index } %>
+<% end %>

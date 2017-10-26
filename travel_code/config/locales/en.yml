@@ -56,6 +56,7 @@ en:
     latitude: "Latitude"
     address: "Address"
     phone: "Phone"
+    attraction_photo: "Attraction photo"
   user:
     user: "User"
     all: "Users"

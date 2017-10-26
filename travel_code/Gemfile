@@ -77,6 +77,9 @@ end
 # language
 gem 'rails-i18n'
 
+gem 'carrierwave'
+gem 'mini_magick'
+
 # Rails Assets
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'

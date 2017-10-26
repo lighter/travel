@@ -35,6 +35,7 @@ zh-TW:
     latitude: "緯度"
     address: "地址"
     phone: "電話"
+    attraction_photo: "景點照片"
   user:
     user: "使用者"
     all: "所有使用者"

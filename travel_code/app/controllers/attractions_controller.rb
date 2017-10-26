@@ -1,6 +1,6 @@
 class AttractionsController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
+  # before_action :correct_user, only: [:edit, :update]
 
   def index
     @attractions = Attraction.paginate(page: params[:page])
@@ -8,6 +8,7 @@ class AttractionsController < ApplicationController
 
   def new
     @attractions = Attraction.new
+    @attractions.attraction_photos.build
   end
 
   def create
@@ -60,7 +61,7 @@ class AttractionsController < ApplicationController
   private
 
   def attraction_params
-    params.require(:attraction).permit(:name, :longitude, :latitude, :address, :phone, :category_id)
+    params.require(:attraction).permit(:name, :longitude, :latitude, :address, :phone, :category_id, attraction_photos_attributes: {photo: []})
   end
 
   def edit_attraction_params

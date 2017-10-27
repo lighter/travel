@@ -13,7 +13,7 @@
           <%= f.fields_for :attraction_photos do |att_photo| %>
               <%= att_photo.label :photo, t("attraction.attraction_photo"), class: "col-md-2 control-label" %>
               <div class="col-md-10">
-                <%= att_photo.file_field :photo, class: "form-control", multiple: true %>
+                <%= att_photo.file_field :photo, class: "form-control", multiple: true, name: "attraction_photos[photo][]" %>
               </div>
           <% end %>
         </div>

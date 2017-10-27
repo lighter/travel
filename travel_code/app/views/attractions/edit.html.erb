@@ -7,7 +7,7 @@
 <h1>New Atrraction</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@attraction, url: attraction_edit_path(@attraction.id), html: {method: 'put'}) do |f| %>
+    <%= form_for(@attraction, url: attraction_edit_path(@attraction.id), html: { method: 'put' }) do |f| %>
         <div class="form-group">
           <%= f.label :name, class: "col-md-2 control-label" %>
           <div class="col-md-10">
@@ -16,12 +16,17 @@
         </div>
 
         <div class="form-group">
-          <%= image_tag @attraction.attraction_photos.first.photo.thumb.url, class: 'style_image' %>
-          <%= f.fields_for :attraction_photos do |att_photo| %>
+          <%= f.fields_for @attraction do |att_photo| %>
               <%= att_photo.label :photo, t("attraction.attraction_photo"), class: "col-md-2 control-label" %>
               <div class="col-md-10">
-                <%= att_photo.file_field :photo, class: "form-control" %>
+                <%= att_photo.file_field :photo, class: "form-control", multiple: true, name: "attraction_photos[photo][]" %>
               </div>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <% @attraction.attraction_photos.each do |attraction_photo| %>
+              <%= image_tag attraction_photo.photo.thumb.url, style: "border: 1px solid #ccc; padding: 2px 2px 2px 2px;" %>
           <% end %>
         </div>
 
@@ -42,7 +47,7 @@
         <div class="form-group">
           <%= f.label :category_id, class: "col-md-2 control-label" %>
           <div class="col-md-10">
-            <%= collection_select(:attraction, :category_id, Category.all, :id, :name, {}, {class: 'form-control'}) %>
+            <%= collection_select(:attraction, :category_id, Category.all, :id, :name, {}, { class: 'form-control' }) %>
           </div>
         </div>
 

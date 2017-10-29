@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   post 'attractions' => 'attractions#create'
   delete 'attractions/:id' => 'attractions#destroy', as: :attraction_destroy
   get 'attractions/search' => 'attractions#search'
+  post 'attraction/favorite/:id' => 'attractions#favorite'
+  post 'attraction/unfavorite/:id' => 'attractions#unfavorite'
 
   get 'categories' => 'categories#index'
   get 'categories/new' => 'categories#new', as: :category_new

@@ -24,4 +24,26 @@ $(function () {
     }
   });
 
+  $(document).on('ajax:complete', '.favorite', function(e, data, status, xhr) {
+    var response = data.responseJSON;
+
+    if (response.status === 'true') {
+      $(this).attr('href', '/attraction/unfavorite/' + response.id)
+        .removeClass('favorite').addClass('unfavorite')
+        .removeClass('btn-primary').addClass('btn-danger')
+        .text('刪除收藏');
+    }
+  });
+
+  $(document).on('ajax:complete', '.unfavorite', function(e, data, status, xhr) {
+    var response = data.responseJSON;
+
+    if (response.status === 'true') {
+      $(this).attr('href', '/attraction/favorite/' + response.id)
+        .removeClass('unfavorite').addClass('favorite')
+        .removeClass('btn-danger').addClass('btn-primary')
+        .text('收藏');
+    }
+  });
+
 });

@@ -10,7 +10,7 @@ class AttractionsController < ApplicationController
   end
 
   def new
-    @attractions = Attraction.new
+    @attractions       = Attraction.new
     @attraction_photos = @attractions.attraction_photos.build
   end
 
@@ -47,7 +47,7 @@ class AttractionsController < ApplicationController
       params[:attraction_photos]['photo'].each do |a|
         @attraction_photos = @attraction.attraction_photos.create!(:photo => a)
       end
-      
+
       flash[:success] = "更新成功"
       redirect_to attractions_path
     else
@@ -57,7 +57,7 @@ class AttractionsController < ApplicationController
   end
 
   def destroy
-    if Attraction.find(delete_attraction_params[:id]).soft_delete                                                                                        ``
+    if Attraction.find(delete_attraction_params[:id]).soft_delete ``
       flash[:success] = "刪除成功"
     else
       flash[:success] = "刪除失敗"
@@ -74,6 +74,25 @@ class AttractionsController < ApplicationController
     render 'index'
   end
 
+  def favorite
+    @attraction = Attraction.find(params[:id])
+    result      = current_user.favorite(@attraction)
+
+
+    respond_to do |format|
+      format.json { render json: { status: result.save.to_s, id: params[:id] } }
+    end
+  end
+
+  def unfavorite
+    @attraction = Attraction.find(params[:id])
+    result      = current_user.unfavorite(@attraction)
+
+    respond_to do |format|
+      format.json { render json: { status: result.save.to_s, id: params[:id] } }
+    end
+  end
+
 
   private
 
@@ -86,14 +105,15 @@ class AttractionsController < ApplicationController
   end
 
   def delete_attraction_params
-    flash[:danger] =
     params.permit(:id)
   end
 
   def check_file_item_number
-    if params[:attraction_photos]['photo'].count > 5
-      flash[:danger] = '最多5個檔案'
-      go_return_to
+    if params.has_key?(:attraction_photos)
+      if params[:attraction_photos]['photo'].count > 5
+        flash[:danger] = '最多5個檔案'
+        go_return_to
+      end
     end
   end
 

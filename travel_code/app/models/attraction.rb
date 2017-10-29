@@ -3,6 +3,8 @@ class Attraction < ActiveRecord::Base
   belongs_to :category
   has_many :attraction_photos, dependent: :destroy
 
+  has_many :user_relationships, class_name: "Relationship", foreign_key: "attraction_id", dependent: :destroy
+
   accepts_nested_attributes_for :attraction_photos
 
   validates :user_id, presence: true

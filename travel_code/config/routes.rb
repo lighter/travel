@@ -9,7 +9,12 @@ Rails.application.routes.draw do
   post 'log_in' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  resources :users, except: [:new]
+  resources :users, except: [:new] do
+    member do
+      get :favorite, :attraction
+    end
+  end
+  
   get 'sign_up' => 'users#new'
 
   # omniauth facebook
@@ -23,6 +28,7 @@ Rails.application.routes.draw do
   get 'attractions/new' => 'attractions#new', as: :attraction_new
   get 'attractions/:id/edit' => 'attractions#edit', as: :attraction
   put 'attractions/:id' => 'attractions#update', as: :attraction_edit
+  get 'attractions/:id' => 'attractions#show', as: :attraction_show
   post 'attractions' => 'attractions#create'
   delete 'attractions/:id' => 'attractions#destroy', as: :attraction_destroy
   get 'attractions/search' => 'attractions#search'

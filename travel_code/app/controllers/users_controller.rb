@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @user_attractions = @user.attractions.paginate(page: params[:page])
   end
 
   def create
@@ -61,6 +62,18 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "刪除成功"
     redirect_to users_url
+  end
+
+  def attraction
+    @user = User.find(params[:id])
+    @user_attractions = @user.attractions.paginate(page: params[:page])
+
+    render 'show'
+  end
+
+  def favorite
+    @user = User.find(params[:id])
+    @user_attractions = @user.attraction_relationships.includes(:attraction).paginate(page: params[:page])
   end
 
   private

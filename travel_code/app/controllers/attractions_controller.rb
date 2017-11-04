@@ -14,6 +14,10 @@ class AttractionsController < ApplicationController
     @attraction_photos = @attractions.attraction_photos.build
   end
 
+  def show
+    @attraction = Attraction.find(params[:id])
+  end
+
   def create
     @attractions = current_user.attractions.build(attraction_params)
 

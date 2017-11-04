@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :categories
 
   has_many :attraction_relationships, class_name: "Relationship", foreign_key: "user_id", dependent: :destroy
+  has_many :favoriting, through: :attraction_relationships, source: :attraction
 
 
   # 添加密碼驗證
@@ -115,4 +116,9 @@ class User < ActiveRecord::Base
     self.activation_token  = User.new_token
     self.activation_digest = User.digest(activation_token)
   end
+
+  def favoriting?(attraction)
+    favoriting.include?(attraction)
+  end
+  
 end

@@ -1,0 +1,15 @@
+<%= will_paginate user_attractions %>
+<table class="table table-condensed table-hover" id="attraction_table">
+  <% user_attractions.each do |attraction| %>
+      <tr>
+        <td>
+          <% if type == 'favorite' %>
+              <%= link_to attraction.attraction.name, attraction_show_path(attraction.attraction) %>
+          <% else %>
+              <%= link_to attraction.name, attraction_show_path(attraction) %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+<%= will_paginate user_attractions %>

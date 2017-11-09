@@ -24,16 +24,32 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_reset, only: [:new, :create, :edit, :update]
 
-  get 'attractions' => 'attractions#index'
-  get 'attractions/new' => 'attractions#new', as: :attraction_new
-  get 'attractions/:id/edit' => 'attractions#edit', as: :attraction
-  put 'attractions/:id' => 'attractions#update', as: :attraction_edit
-  get 'attractions/:id' => 'attractions#show', as: :attraction_show
-  post 'attractions' => 'attractions#create'
-  delete 'attractions/:id' => 'attractions#destroy', as: :attraction_destroy
-  get 'attractions/search' => 'attractions#search'
-  post 'attraction/favorite/:id' => 'attractions#favorite'
-  post 'attraction/unfavorite/:id' => 'attractions#unfavorite'
+  # get 'attractions' => 'attractions#index'
+  # get 'attractions/search_user' => 'attractions#search_user'
+  # get 'attractions/search' => 'attractions#search'
+  # get 'attractions/new' => 'attractions#new', as: :attraction_new
+  # get 'attractions/:id/edit' => 'attractions#edit', as: :attraction
+  # put 'attractions/:id' => 'attractions#update', as: :attraction_edit
+  # get 'attractions/:id' => 'attractions#show', as: :attraction_show
+  # post 'attractions' => 'attractions#create'
+  # delete 'attractions/:id' => 'attractions#destroy', as: :attraction_destroy
+
+  # post 'attraction/favorite/:user_id' => 'attractions#favorite'
+  # post 'attraction/unfavorite/:user_id' => 'attractions#unfavorite'
+  # get 'attraction/:user_id/user' => 'attractions#user_attraction', as: :user_attraction
+  
+  resources :attractions do
+    collection do
+      get 'search_user'
+      get 'search'
+    end
+
+    member do
+      post 'favorite'
+      post 'unfavorite'
+      get 'user' => 'attractions#user_attraction'
+    end
+  end
 
   get 'categories' => 'categories#index'
   get 'categories/new' => 'categories#new', as: :category_new

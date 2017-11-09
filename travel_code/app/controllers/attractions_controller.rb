@@ -1,12 +1,16 @@
 class AttractionsController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :edit, :update, :destroy]
-  # before_action :correct_user, only: [:edit, :update]
+  before_action :is_owner, only: [:edit, :update]
 
   before_action :set_return_to, only: [:new, :edit]
   before_action :check_file_item_number, only: [:create, :update]
 
   def index
     @attractions = Attraction.paginate(page: params[:page])
+  end
+
+  def user_attraction
+    @attractions = Attraction.where(user_id: current_user.id).paginate(page: params[:page])
   end
 
   def new
@@ -22,8 +26,10 @@ class AttractionsController < ApplicationController
     @attractions = current_user.attractions.build(attraction_params)
 
     if @attractions.save
-      params[:attraction_photos]['photo'].each do |photo|
-        @attraction_photos = @attractions.attraction_photos.create!(:photo => photo)
+      if (params.has_key?(:attraction_photos) && params[:attraction_photos].any?)
+        params[:attraction_photos]['photo'].each do |photo|
+          @attraction_photos = @attractions.attraction_photos.create!(:photo => photo)
+        end
       end
 
       flash[:success] = "新增成功"
@@ -78,6 +84,12 @@ class AttractionsController < ApplicationController
     render 'index'
   end
 
+  def search_user
+    @attractions = Attraction.where('user_id = :user_id AND name like :search_name', {user_id: current_user.id, search_name: params[:search_name]}).paginate(page: params[:page])
+
+    render 'user_attraction'
+  end
+
   def favorite
     @attraction = Attraction.find(params[:id])
     result      = current_user.favorite(@attraction)
@@ -127,5 +139,10 @@ class AttractionsController < ApplicationController
 
   def go_return_to
     redirect_to session.delete(:return_to)
+  end
+
+  def is_owner
+    attraction = Attraction.find(params[:id])
+    redirect_to(root_url) unless attraction.user === current_user
   end
 end

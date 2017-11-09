@@ -4,9 +4,9 @@
       <tr>
         <td>
           <% if type == 'favorite' %>
-              <%= link_to attraction.attraction.name, attraction_show_path(attraction.attraction) %>
+              <%= link_to attraction.attraction.name, attraction_path(attraction.attraction) %>
           <% else %>
-              <%= link_to attraction.name, attraction_show_path(attraction) %>
+              <%= link_to attraction.name, attraction_path(attraction) %>
           <% end %>
         </td>
       </tr>

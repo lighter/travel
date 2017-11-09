@@ -7,7 +7,7 @@
 <h1>Edit Atrraction</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@attraction, url: attraction_edit_path(@attraction.id), html: { method: 'put' }) do |f| %>
+    <%= form_for(@attraction, url: edit_attractions_path(@attraction.id), html: { method: 'put' }) do |f| %>
         <div class="form-group">
           <%= f.label :name, class: "col-md-2 control-label" %>
           <div class="col-md-10">

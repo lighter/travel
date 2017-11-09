@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :is_owner, only: [:edit, :update]
   before_action :admin_user, only: [:create, :destroy]
 
   def index
@@ -62,5 +62,10 @@ class CategoriesController < ApplicationController
 
   def edit_category_params
     params.permit(:id)
+  end
+
+  def is_owner
+    category = Category.find(params[:id])
+    redirect_to(root_url) unless category.user === current_user
   end
 end

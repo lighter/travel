@@ -2,8 +2,13 @@ $(function () {
   $('#search_attraction').click(function () {
     var search_attraction_name = $('#search_attraction_name').val();
 
+    console.log(search_attraction_name);
+
     if (search_attraction_name !== '') {
-      window.location.href = window.location.origin + '/attractions/search?search_name=' + search_attraction_name;
+      if ($('#search_attraction').data('search') === 'user')
+        window.location.href = window.location.origin + '/attractions/search_user?search_name=' + search_attraction_name;
+      else
+        window.location.href = window.location.origin + '/attractions/search?search_name=' + search_attraction_name;
     }
   });
 });

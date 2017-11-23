@@ -47,13 +47,13 @@ ActiveRecord::Schema.define(version: 20171029054728) do
 
   create_table "relationships", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "attration_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "attraction_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "relationships", ["attration_id"], name: "index_relationships_on_attration_id", using: :btree
-  add_index "relationships", ["user_id", "attration_id"], name: "index_relationships_on_user_id_and_attration_id", unique: true, using: :btree
+  add_index "relationships", ["attraction_id"], name: "index_relationships_on_attraction_id", using: :btree
+  add_index "relationships", ["user_id", "attraction_id"], name: "index_relationships_on_user_id_and_attraction_id", unique: true, using: :btree
   add_index "relationships", ["user_id"], name: "index_relationships_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|

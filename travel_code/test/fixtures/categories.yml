@@ -2,6 +2,7 @@
 
 food:
   name: "食"
+  user: test
 clothes:
   name: "衣"
   

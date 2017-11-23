@@ -4,6 +4,7 @@ class AttractionsController < ApplicationController
 
   before_action :set_return_to, only: [:new, :edit]
   before_action :check_file_item_number, only: [:create, :update]
+  before_action :admin_user, only: [:index]
 
   def index
     @attractions = Attraction.paginate(page: params[:page])
@@ -85,7 +86,7 @@ class AttractionsController < ApplicationController
   end
 
   def search_user
-    @attractions = Attraction.where('user_id = :user_id AND name like :search_name', {user_id: current_user.id, search_name: params[:search_name]}).paginate(page: params[:page])
+    @attractions = Attraction.where('user_id = :user_id AND name like :search_name', { user_id: current_user.id, search_name: params[:search_name] }).paginate(page: params[:page])
 
     render 'user_attraction'
   end

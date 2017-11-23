@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :edit, :update, :destroy]
   before_action :is_owner, only: [:edit, :update]
-  before_action :admin_user, only: [:create, :destroy]
+  before_action :admin_user
 
   def index
     @categories = Category.paginate(page: params[:page], per_page: 10)
@@ -24,10 +24,15 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    if Category.find(delete_category_params[:id]).soft_delete
-      flash[:success] = "刪除成功"
+    @category = Category.find_by(id: delete_category_params[:id])
+    if !@category.nil?
+      if @category.soft_delete
+        flash[:success] = "刪除成功"
+      else
+        flash[:danger] = "刪除失敗"
+      end
     else
-      flash[:danger] = "刪除失敗"
+      flash[:danger] = "該筆資料不存在"
     end
     redirect_to categories_path
   end

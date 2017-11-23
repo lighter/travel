@@ -21,13 +21,13 @@
           <td><%= time_ago_in_words(category.updated_at) %></td>
           <td>
             <%= link_to t("delete"),
-                        category_destroy_path(category.id),
+                        category_path(category.id),
                         method: :delete,
                         data: {confirm: t("delete_confirm?")},
                         class: 'btn btn-danger' %>
 
             <%= link_to t("update"),
-                        category_path(category.id),
+                        edit_category_path(category.id),
                         class: 'btn btn-primary' %>
           </td>
         </tr>

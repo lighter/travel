@@ -7,5 +7,5 @@ script:
     - bundle exec rake db:test:prepare
 before_install:
     - cd travel_code
-    - psql -c 'create database mydb_test' -U postgres
     - cp config/database.travis.yml config/database.yml
+    - psql -c 'create database mydb_test' -U postgres

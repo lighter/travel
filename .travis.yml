@@ -10,5 +10,6 @@ before_install:
     - cp config/database.travis.yml config/database.yml
     - psql -c 'create database mydb_test' -U postgres
 before_script:
-    - openssl aes-256-cbc -K $encrypted_a2f6a16f2794_key -iv $encrypted_a2f6a16f2794_iv -in ./travel_code/config/secrets.yml.enc -out ./travel_code/config/secrets.yml -d
+    - cd travel_code/config
+    - openssl aes-256-cbc -K $encrypted_a2f6a16f2794_key -iv $encrypted_a2f6a16f2794_iv -in secrets.yml.enc -out secrets.yml -d
 

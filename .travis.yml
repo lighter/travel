@@ -4,12 +4,12 @@ rvm:
 env:
     - DB=postgresql
 script:
-    - cp secrets.yml travel_code/config/secrets.yml
     - bundle exec rake db:test:prepare
 before_install:
+    - openssl aes-256-cbc -K $encrypted_a2f6a16f2794_key -iv $encrypted_a2f6a16f2794_iv -in secrets.yml.enc -out secrets.yml -d
+    - cp secrets.yml travel_code/config/secrets.yml
     - cd travel_code
     - cp config/database.travis.yml config/database.yml
     - psql -c 'create database mydb_test' -U postgres
-before_script:
-    - openssl aes-256-cbc -K $encrypted_a2f6a16f2794_key -iv $encrypted_a2f6a16f2794_iv -in secrets.yml.enc -out secrets.yml -d
+
 

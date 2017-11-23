@@ -4,9 +4,9 @@ rvm:
 env:
     - DB=postgresql
 script:
+    - cp secrets.yml travel_code/config/secrets.yml
     - bundle exec rake db:test:prepare
 before_install:
-    - cp secrets.yml travel_code/config/secrets.yml
     - cd travel_code
     - cp config/database.travis.yml config/database.yml
     - psql -c 'create database mydb_test' -U postgres

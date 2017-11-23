@@ -4,9 +4,9 @@ rvm:
 env:
     - DB=postgresql
 script:
-    - bundle exec rake db:migrate --trace RAILS_ENV=test
+    - bundle exec rake db:test:prepare
 before_install:
-    - cd travel_code
     - cp config/database.travis.yml config/database.yml
     - psql -c 'create database mydb_test' -U postgres
+    - cd travel_code
 

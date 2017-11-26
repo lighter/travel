@@ -1,11 +1,18 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+attraction1:
+  name: attraction1
+  latitude: 12.23
+  longitude: 34.12
+  address: Kan Rd.
+  phone: 944309123
+  category: food
+  user: test
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+attraction2:
+  name: attraction2
+  latitude: 45.234
+  longitude: 89.123
+  address: Nei Rd.
+  phone: 23419943
+  category: clothes
+  user: hogs
+  

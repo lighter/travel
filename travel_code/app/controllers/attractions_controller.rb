@@ -1,6 +1,6 @@
 class AttractionsController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :edit, :update, :destroy]
-  before_action :is_owner, only: [:edit, :update]
+  before_action :is_owner, only: [:edit, :update, :destroy]
 
   before_action :set_return_to, only: [:new, :edit]
   before_action :check_file_item_number, only: [:create, :update]
@@ -43,7 +43,6 @@ class AttractionsController < ApplicationController
 
   def edit
     @attraction = Attraction.find(edit_attraction_params[:id])
-    # @attraction_photos = @attraction.attraction_photos.new
   end
 
   def update
@@ -55,8 +54,10 @@ class AttractionsController < ApplicationController
 
     if @attraction.update_attributes(attraction_params)
 
-      params[:attraction_photos]['photo'].each do |a|
-        @attraction_photos = @attraction.attraction_photos.create!(:photo => a)
+      if (params.has_key?(:attraction_photos) && params[:attraction_photos].any?)
+        params[:attraction_photos]['photo'].each do |a|
+          @attraction_photos = @attraction.attraction_photos.create!(:photo => a)
+        end
       end
 
       flash[:success] = "更新成功"
@@ -68,7 +69,7 @@ class AttractionsController < ApplicationController
   end
 
   def destroy
-    if Attraction.find(delete_attraction_params[:id]).soft_delete ``
+    if Attraction.find(delete_attraction_params[:id]).soft_delete
       flash[:success] = "刪除成功"
     else
       flash[:success] = "刪除失敗"

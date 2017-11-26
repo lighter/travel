@@ -93,21 +93,28 @@ class AttractionsController < ApplicationController
   end
 
   def favorite
-    @attraction = Attraction.find(params[:id])
-    result      = current_user.favorite(@attraction)
-
+    if Attraction.exists?(params[:id])
+      @attraction = Attraction.find(params[:id])
+      result      = current_user.favorite(@attraction).save.to_s
+    else
+      result = 'false'
+    end
 
     respond_to do |format|
-      format.json { render json: { status: result.save.to_s, id: params[:id] } }
+      format.json { render json: { status: result, id: params[:id] } }
     end
   end
 
   def unfavorite
-    @attraction = Attraction.find(params[:id])
-    result      = current_user.unfavorite(@attraction)
+    if Attraction.exists?(params[:id])
+      @attraction = Attraction.find(params[:id])
+      result      = current_user.unfavorite(@attraction).save.to_s
+    else
+      result = false.to_s
+    end
 
     respond_to do |format|
-      format.json { render json: { status: result.save.to_s, id: params[:id] } }
+      format.json { render json: { status: result, id: params[:id] } }
     end
   end
 

@@ -106,4 +106,31 @@ class AttractionsControllerTest < ActionController::TestCase
     body = JSON.parse(response.body)
     assert_equal "true", body['status']
   end
+
+  test "should_not_favorite_attraction" do
+    log_in_as(@user)
+    xhr :post, :favorite, id: 999
+
+    body = JSON.parse(response.body)
+    assert_equal "false", body['status']
+  end
+
+  test "should_unfavorite_attraction" do
+    log_in_as(@user)
+    xhr :post, :favorite, id: @attraction1.id
+
+    xhr :post, :unfavorite, id: @attraction1.id
+
+    body = JSON.parse(response.body)
+    assert_equal 'true', body['status']
+  end
+
+
+  test "should_not_unfavorite_attraction" do
+    log_in_as(@user)
+    xhr :post, :unfavorite, id: 999
+
+    body = JSON.parse(response.body)
+    assert_equal 'false', body['status']
+  end
 end

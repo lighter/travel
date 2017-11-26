@@ -1,3 +1,4 @@
+[![Coverage Status](https://coveralls.io/repos/github/lighter/travel/badge.svg?branch=master)](https://coveralls.io/github/lighter/travel?branch=develop)
 
 ```
 $ docker-compose build --no-cache

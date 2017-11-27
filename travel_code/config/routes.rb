@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'home_page#index'
-  post 'home/attractions' => 'home_page#ajaxGetAttractions'
+  match 'home/attractions', to: 'home_page#ajaxGetAttractions', via: 'post'
+  # post 'home/attractions' => 'home_page#ajaxGetAttractions'
 
   get 'password_reset/new'
   get 'password_reset/edit'

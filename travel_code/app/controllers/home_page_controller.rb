@@ -13,8 +13,8 @@ class HomePageController < ApplicationController
             current_page: @attractions.current_page,
             total_page:   @attractions.total_pages,
             per_page:     @attractions.per_page,
-            total_count: @attractions.total_entries,
-            next_page: @attractions.next_page,
+            total_count:  @attractions.total_entries,
+            next_page:    @attractions.next_page,
         }
     }
   end

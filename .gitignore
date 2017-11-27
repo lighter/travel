@@ -1,2 +1,4 @@
 /.idea
 /travel_code/public/uploads
+/travel_code/coverage
+/.coveralls.yml
